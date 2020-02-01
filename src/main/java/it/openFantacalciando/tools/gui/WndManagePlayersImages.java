@@ -24,6 +24,8 @@ public class WndManagePlayersImages extends JFrame{
 	private JTextField txtPercorsoDestinazione;
 	private JTextField txtPercorsoFileIndici;
 	private JTextField txtAltezzaImmagine;
+	private JButton btnGeneraListaMancanti;
+	private JCheckBox chckbxGeneraListaFotoMancanti;
 	
 
 	public static void main(String[] args) {
@@ -43,7 +45,7 @@ public class WndManagePlayersImages extends JFrame{
 	public WndManagePlayersImages() {
 		this.setTitle("Gestione Foto Calciatori");
 		this.getContentPane().setLayout(null);
-		this.setBounds(100, 100, 633, 215);
+		this.setBounds(100, 100, 633, 220);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblFonteQuotazioni = new JLabel("Percorso cartella immagini:");
@@ -166,5 +168,39 @@ public class WndManagePlayersImages extends JFrame{
 		});
 		btnConverti.setBounds(491, 111, 85, 21);
 		getContentPane().add(btnConverti);
+
+
+		btnGeneraListaMancanti = new JButton("Genera");
+		btnGeneraListaMancanti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ManageImagesLogic mil = new ManageImagesLogic(txtPercorsoFileIndici.getText(),
+						txtPercorsoImmagini.getText()
+				);
+				try {
+					mil.generateMissingPhotoList();
+					JOptionPane.showMessageDialog(null, "Lista generata con successo!");
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Errore generico durante l'elaborazione delle immagini", "Error!",JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+			}
+		});
+		btnGeneraListaMancanti.setBounds(491, 135, 85, 21);
+		getContentPane().add(btnGeneraListaMancanti);
+
+
+
+		chckbxGeneraListaFotoMancanti = new JCheckBox("Genera lista delle foto mancanti");
+		chckbxGeneraListaFotoMancanti.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				if (chckbxGeneraListaFotoMancanti.isSelected()) {
+					btnGeneraListaMancanti.setEnabled(true);
+				}else {
+					btnGeneraListaMancanti.setEnabled(false);
+				}
+			}
+		});
+		chckbxGeneraListaFotoMancanti.setBounds(6, 135, 219, 21);
+		getContentPane().add(chckbxGeneraListaFotoMancanti);
 	}
 }

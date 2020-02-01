@@ -148,7 +148,7 @@ public class PreSeasonOperation extends Operation {
 		writer = new PrintWriter(destination_path+"\\"+Variables.TEAMS_FILENAME, "UTF-8");
 		
 		for (Quotation q : quotations) {
-			if (!q.getTeam().trim().equals("") && !teams.contains(q.getTeam())) {
+			if (!q.getTeam().equals("") && !teams.contains(q.getTeam())) {
 				teams.add(q.getTeam());
 			}
 		}
@@ -205,11 +205,11 @@ public class PreSeasonOperation extends Operation {
 			if (i != quotations.size()-1) {
 				writer.println(quotations.get(i).getGeneratedId() + "|" +
 								quotations.get(i).getId() + "|" + 
-								quotations.get(i).getName().trim());
+								quotations.get(i).getName());
 			}else {
 				writer.print(quotations.get(i).getGeneratedId() + "|" +
 						quotations.get(i).getId() + "|" + 
-						quotations.get(i).getName().trim());
+						quotations.get(i).getName());
 			}
 			
 		}
@@ -375,7 +375,7 @@ public class PreSeasonOperation extends Operation {
 		for (int i = 0; i < ids.size(); i++) {
 			writer.println(ids.get(i).getGeneratedIndex() + "|" +
 				ids.get(i).getDraftIndex() + "|" + 
-				ids.get(i).getPlayerName().trim());
+				ids.get(i).getPlayerName());
 	
 		}
 		
@@ -389,7 +389,8 @@ public class PreSeasonOperation extends Operation {
 		for (int i = 0; i < existingPlayers.size(); i++) {
 			for (int j = 0; j < newQuotations.size(); j++) {
 				if (existingPlayers.get(i).getCognome().equals(newQuotations.get(j).getName())) {
-					existingPlayers.get(i).setValore((int) newQuotations.get(j).getCurrentQuotation()); 
+					existingPlayers.get(i).setValore((int) newQuotations.get(j).getCurrentQuotation());
+					existingPlayers.get(i).setSquadra(newQuotations.get(j).getTeam());
 				}
 			}
 		}

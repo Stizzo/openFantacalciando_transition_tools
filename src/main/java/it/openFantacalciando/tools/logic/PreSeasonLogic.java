@@ -65,6 +65,7 @@ public class PreSeasonLogic {
 		
 		existingPlayers = operation.readFootballersList(existingFootballersListPath);
 		existingPlayers = operation.updateTransferStatus(existingPlayers, newQuotations);
+
 		
 		newPlayers = operation.findNewFootballersAndGenerateIDs(newQuotations, existingPlayers);
 		existingPlayers = operation.updateExistingQuotations(newQuotations, existingPlayers);

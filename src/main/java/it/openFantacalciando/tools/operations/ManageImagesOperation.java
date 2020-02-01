@@ -3,18 +3,16 @@ package it.openFantacalciando.tools.operations;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.imageio.ImageIO;
 
-
+import it.openFantacalciando.tools.global.Variables;
 import it.openFantacalciando.tools.models.IndexEntry;
-
 
 public class ManageImagesOperation extends Operation{
 	
@@ -79,4 +77,29 @@ public class ManageImagesOperation extends Operation{
         g2d.dispose();
         return resized;
     }
+
+    public List<IndexEntry> fetchMissingPhotos(List<IndexEntry> indices, String sourceImagesPath) {
+		List<IndexEntry> missingPhotos = new ArrayList<IndexEntry>();
+		File image;
+		for (IndexEntry index : indices) {
+			image = new File(sourceImagesPath+"\\"+index.getDraftIndex()+".png");
+			System.out.println("Cerco: " + sourceImagesPath+"\\"+index.getDraftIndex()+".png");
+			if (!image.exists()){
+				missingPhotos.add(index);
+			}
+		}
+
+		return missingPhotos;
+    }
+
+	public void writeMissingPhotoList(String sourceImagesPath, List<IndexEntry> missingPhotos) throws FileNotFoundException {
+		PrintWriter writer;
+		writer = new PrintWriter(sourceImagesPath + "\\" + Variables.MISSINGPHOTO_FILENAME);
+
+		for (IndexEntry missingPhoto : missingPhotos){
+			writer.println(missingPhoto.getDraftIndex() + " - " + missingPhoto.getPlayerName() + " (" + missingPhoto.getGeneratedIndex()+")");
+		}
+		writer.flush();
+		writer.close();
+	}
 }

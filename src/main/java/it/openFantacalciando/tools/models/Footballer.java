@@ -82,7 +82,7 @@ public class Footballer {
 	}
 
 	public void setSquadra(String squadra) {
-		this.squadra = squadra;
+		this.squadra = "\"" + squadra + "\"";
 	}
 
 	public int getTrasferito() {

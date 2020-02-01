@@ -23,8 +23,12 @@ public class ManageImagesLogic {
 		this.destinationImagesPath = destinationImagesPath;
 		this.heightImagesToResize = heightImagesToResize;
 		this.doResize = doResize;
-		
+	}
 
+	public ManageImagesLogic(String pathIndexFile, String sourceImagesPath) {
+		operation = new ManageImagesOperation();
+		this.pathIndexFile = pathIndexFile;
+		this.sourceImagesPath = sourceImagesPath;
 	}
 	
 	public void processImages() throws FileNotFoundException {
@@ -39,6 +43,12 @@ public class ManageImagesLogic {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void generateMissingPhotoList() throws FileNotFoundException {
+		List<IndexEntry> indices = operation.readIndexEntries(pathIndexFile);
+		List<IndexEntry> missingPhotos = operation.fetchMissingPhotos(indices, sourceImagesPath);
+		operation.writeMissingPhotoList(sourceImagesPath, missingPhotos);
 	}
 	
 }

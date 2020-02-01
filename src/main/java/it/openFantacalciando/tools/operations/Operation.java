@@ -26,8 +26,8 @@ public class Operation {
 			line = scanner.nextLine();
 			String[] arraySplittate = line.split("\\|");
 
-			IndexEntry ie = new IndexEntry(Integer.parseInt(arraySplittate[0].trim()),
-					Integer.parseInt(arraySplittate[1].trim()), arraySplittate[2].trim());
+			IndexEntry ie = new IndexEntry(Integer.parseInt(arraySplittate[0]),
+					Integer.parseInt(arraySplittate[1]), arraySplittate[2]);
 
 			entries.add(ie);
 
@@ -54,7 +54,7 @@ public class Operation {
 			// Creazione di un calciatore scartando i parametri "di giornata"
 			Footballer a = new Footballer(Integer.parseInt(arraySplittate[0]), // id
 					Integer.parseInt(arraySplittate[1]), // giornata
-					arraySplittate[2].replaceAll("\"", "").trim(), // cognome
+					arraySplittate[2].replaceAll("\"", ""), // cognome
 					arraySplittate[3], // squadra
 					Integer.parseInt(arraySplittate[4]), // trasferito
 					Integer.parseInt(arraySplittate[5]), // ruolo
@@ -100,6 +100,8 @@ public class Operation {
 					+ "|" + existingPlayers.get(i).getPresenza() + "|"
 					// +a.get(i).getFantavoto()+"|"
 					+ "0.0|" + existingPlayers.get(i).getMinutiInf() + "|" + existingPlayers.get(i).getMinutiSup() + "|"
+
+
 					// +a.get(i).getVoto()+"|"
 					+ "0.0|" + existingPlayers.get(i).getGolSeg() + "|" + existingPlayers.get(i).getGolSub() + "|"
 					+ existingPlayers.get(i).getGolVit() + "|" + existingPlayers.get(i).getGolPar() + "|" + existingPlayers.get(i).getAssist()
