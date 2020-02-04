@@ -397,5 +397,24 @@ public class PreSeasonOperation extends Operation {
 		
 		return existingPlayers;
 	}
-	
+
+
+	public List<Footballer> updateFootballersName(List<Footballer> existingPlayers, List<Quotation> newQuotations, List<IndexEntry> ids) {
+		for (int i = 0; i < newQuotations.size(); i++){
+			for (int j = 0; j < ids.size(); j++){
+				if (newQuotations.get(i).getId() == ids.get(j).getDraftIndex() &&
+				!newQuotations.get(i).getName().equals(ids.get(j).getPlayerName())){
+					System.out.println("Nuova correzione nome trovata: " + newQuotations.get(i).getName());
+					for (int k = 0 ; k < existingPlayers.size(); k++){
+						if (existingPlayers.get(k).getId() == ids.get(j).getGeneratedIndex()){
+							existingPlayers.get(k).setCognome(newQuotations.get(i).getName());
+						}
+					}
+
+				}
+			}
+		}
+		return existingPlayers;
+
+	}
 }
