@@ -20,3 +20,4 @@ classes/artifacts/tools_jar/start.bat
 .idea/artifacts/tools_jar.xml
 .idea/.name
 target/
+*.class
