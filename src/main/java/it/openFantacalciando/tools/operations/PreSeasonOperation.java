@@ -404,10 +404,11 @@ public class PreSeasonOperation extends Operation {
 			for (int j = 0; j < ids.size(); j++){
 				if (newQuotations.get(i).getId() == ids.get(j).getDraftIndex() &&
 				!newQuotations.get(i).getName().equals(ids.get(j).getPlayerName())){
-					System.out.println("Nuova correzione nome trovata: " + newQuotations.get(i).getName());
+					System.out.println("Nuova correzione nome trovata: " + newQuotations.get(i).getName() + " - modificare il file dei calciatori manualmente (0 trasferito, 1 presente)");
 					for (int k = 0 ; k < existingPlayers.size(); k++){
 						if (existingPlayers.get(k).getId() == ids.get(j).getGeneratedIndex()){
 							existingPlayers.get(k).setCognome(newQuotations.get(i).getName());
+							ids.get(j).setPlayerName(newQuotations.get(i).getName());
 						}
 					}
 
